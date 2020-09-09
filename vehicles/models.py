@@ -1,3 +1,13 @@
 from django.db import models
 
-# Create your models here.
+
+class Vehicle(models.Model):
+    id = models.UUIDField(primary_key=True, editable=False)
+
+
+class Location(models.Model):
+    lat = models.FloatField()
+    lng = models.FloatField()
+    at = models.DateTimeField()
+    vehicle = models.ForeignKey('Vehicle', on_delete=models.CASCADE,
+                                related_name='steps')

@@ -12,6 +12,7 @@ psycopg2-binary = "*"
 drf-nested-routers = "*"
 djangorestframework = "*"
 coreapi = "*"
+dj-database-url = "*"
 
 [requires]
 python_version = "3.6"

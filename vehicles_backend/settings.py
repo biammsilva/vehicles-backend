@@ -25,9 +25,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = '94)5c649pxx3!qg9hx=v1mgp%5n_l#$!8l9&7uwp)kxy6)**$&'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('DEBUG', True)
 
-ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '127.0.0.1', 'api-vehicles.herokuapp.com']
+ALLOWED_HOSTS = [
+    '0.0.0.0',
+    'localhost',
+    '127.0.0.1',
+    'api-vehicles.herokuapp.com'
+]
 
 
 # Application definition

@@ -6,10 +6,12 @@ verify_ssl = true
 [dev-packages]
 
 [packages]
-django-rest-framework = "*"
 pylint = "*"
 flake8 = "*"
 psycopg2-binary = "*"
+drf-nested-routers = "*"
+djangorestframework = "*"
+coreapi = "*"
 
 [requires]
 python_version = "3.6"

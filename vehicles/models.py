@@ -2,7 +2,7 @@ from django.db import models
 
 
 class Vehicle(models.Model):
-    id = models.UUIDField(primary_key=True, editable=False)
+    id = models.UUIDField(primary_key=True, serialize=True)
 
 
 class Location(models.Model):

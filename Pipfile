@@ -13,6 +13,7 @@ drf-nested-routers = "*"
 djangorestframework = "*"
 coreapi = "*"
 dj-database-url = "*"
+whitenoise = "*"
 
 [requires]
 python_version = "3.6"

@@ -7,4 +7,6 @@ RUN pip install pipenv
 
 RUN pipenv install --system --deploy
 
+ENV DB_HOST=db
+
 EXPOSE 8000 

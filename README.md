@@ -23,6 +23,10 @@ API to provide data for vehicles localization.
 
         pipenv install
 
+* Up the database:
+
+        docker-compose up -d db
+
 * Collect static files:
 
         python manage.py collectstatic --noinput
@@ -58,19 +62,19 @@ Docs will be run at the application main page: http://localhost:8000
 
         docker-compose exec web python manage.py collectstatic
 
-    `note: your container must be running to execute this command. You can do this by open another terminal or running the docker-compose in the daemon mode: docker-compose up -d`
+    `note: your container must be running to execute this command. You can do this by open another terminal or running the docker-compose in detached mode: docker-compose up -d`
 
 * Migrations:
 
         docker-compose exec web python manage.py migrate
 
-    `note: your container must be running to execute this command. You can do this by open another terminal or running the docker-compose in the daemon mode: docker-compose up -d`
+    `note: your container must be running to execute this command. You can do this by open another terminal or running the docker-compose in detached mode: docker-compose up -d`
 
 ### Run:
 
     docker-compose up -d
 
-`it will run at port 8000. Access the application with http://localhost:8000`
+`it will run at port 8000. Access the application with` http://localhost:8000
 
 ## Possible errors:
 

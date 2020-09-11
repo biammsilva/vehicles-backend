@@ -58,9 +58,13 @@ Docs will be run at the application main page: http://localhost:8000
 
         docker-compose exec web python manage.py collectstatic
 
+    `note: your container must be running to execute this command. You can do this by open another terminal or running the docker-compose in the daemon mode: docker-compose up -d`
+
 * Migrations:
 
         docker-compose exec web python manage.py migrate
+
+    `note: your container must be running to execute this command. You can do this by open another terminal or running the docker-compose in the daemon mode: docker-compose up -d`
 
 ### Run:
 
@@ -70,6 +74,8 @@ Docs will be run at the application main page: http://localhost:8000
 
 ## Possible errors:
 
-* `Port 8000 already in use`: For that, kill the port and try again
+* `Port 8000 already in use`: 
+
+    For that, kill the port and try again
 
         sudo lsof -t -i tcp:8000 | xargs sudo kill -9

@@ -41,9 +41,16 @@ API to provide data for vehicles localization.
 
 `it will run at port 8000. You can set the port using python manage.py runserver 0.0.0.0:8001. Access the application with http://localhost:8000`
 
-## Docs
+### Test
+    
+    python manage.py runserver
 
-Docs will be run at the application main page: http://localhost:8000
+* Coverage:
+
+        coverage run --source='.' manage.py test
+        coverage report
+
+`Note: Files as vehicles_backend/wsgi.py, vehicles_backend/asgi.py and manage.py will not have 100% of coverage because they are settings files`
 
 ## Run with docker:
 
@@ -75,6 +82,21 @@ Docs will be run at the application main page: http://localhost:8000
     docker-compose up -d
 
 `it will run at port 8000. Access the application with` http://localhost:8000
+
+### Test
+    
+    docker-compose exec web python manage.py runserver
+
+* Coverage:
+
+        docker-compose exec web coverage run --source='.' manage.py test
+        docker-compose exec web coverage report
+
+`Note: Files as vehicles_backend/wsgi.py, vehicles_backend/asgi.py and manage.py will not have 100% of coverage because they are settings files`
+
+## Docs
+
+Docs will be able at the application main page: http://localhost:8000
 
 ## Possible errors:
 

@@ -8,6 +8,7 @@ from .serializers import VehicleSerializer, LocationSerializer
 
 class VehicleViewSet(mixins.CreateModelMixin,
                      mixins.ListModelMixin,
+                     mixins.RetrieveModelMixin,
                      mixins.DestroyModelMixin,
                      viewsets.GenericViewSet):
     """

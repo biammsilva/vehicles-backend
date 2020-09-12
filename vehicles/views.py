@@ -21,7 +21,7 @@ class VehicleViewSet(mixins.CreateModelMixin,
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)
         headers = self.get_success_headers(serializer.data)
-        return Response(serializer.data, status=status.HTTP_204_NO_CONTENT,
+        return Response(None, status=status.HTTP_204_NO_CONTENT,
                         headers=headers)
 
 
@@ -42,5 +42,5 @@ class LocationViewSet(mixins.CreateModelMixin,
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)
         headers = self.get_success_headers(serializer.data)
-        return Response(serializer.data, status=status.HTTP_204_NO_CONTENT,
+        return Response(None, status=status.HTTP_204_NO_CONTENT,
                         headers=headers)

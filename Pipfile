@@ -15,6 +15,7 @@ coreapi = "*"
 dj-database-url = "*"
 whitenoise = "*"
 gunicorn = "*"
+geopy = "*"
 
 [requires]
 python_version = "3.6"

@@ -25,13 +25,17 @@ class VehicleSerializer(serializers.ModelSerializer):
         fields = ['id', 'last_lat', 'last_lng']
 
     def get_last_lat(self, obj):
-        last_location = Location.objects.filter(
-            vehicle=obj.id
-        ).order_by('-at')[:1][0]
-        return last_location.lat
+        if obj.steps.all():
+            last_location = Location.objects.filter(
+                vehicle=obj.id
+            ).order_by('-at')[:1][0]
+            return last_location.lat
+        return None
 
     def get_last_lng(self, obj):
-        last_location = Location.objects.filter(
-            vehicle=obj.id
-        ).order_by('-at')[:1][0]
-        return last_location.lng
+        if obj.steps.all():
+            last_location = Location.objects.filter(
+                vehicle=obj.id
+            ).order_by('-at')[:1][0]
+            return last_location.lng
+        return None

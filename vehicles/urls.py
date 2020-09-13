@@ -6,12 +6,12 @@ from .views import VehicleViewSet, LocationViewSet
 
 router = routers.SimpleRouter()
 
-router.register(r'', VehicleViewSet)
+router.register('', VehicleViewSet)
 
-vehicles_router = routers.NestedSimpleRouter(router, r'', lookup='vehicle')
+vehicles_router = routers.NestedSimpleRouter(router, '', lookup='vehicle')
 
 vehicles_router.register(
-    r'locations',
+    'locations',
     LocationViewSet,
 )
 

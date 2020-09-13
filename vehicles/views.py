@@ -17,6 +17,9 @@ class VehicleViewSet(mixins.CreateModelMixin,
     queryset = Vehicle.objects.all()
     serializer_class = VehicleSerializer
 
+    def get_queryset(self):
+        return self.queryset.exclude(steps=None)
+
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
@@ -36,7 +39,9 @@ class LocationViewSet(mixins.CreateModelMixin,
     serializer_class = LocationSerializer
 
     def get_queryset(self):
-        return Location.objects.filter(vehicle=self.kwargs['vehicle_pk'])
+        return Location.objects.filter(
+            vehicle=self.kwargs['vehicle_pk']
+        )
 
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)

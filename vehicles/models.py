@@ -10,12 +10,18 @@ class Vehicle(models.Model):
     id = models.UUIDField(primary_key=True, serialize=True)
 
 
+class LocationOrderedManager(models.Manager):
+    def get_queryset(self):
+        return super().get_queryset().order_by('at')
+
+
 class Location(models.Model):
     lat = models.FloatField()
     lng = models.FloatField()
     at = models.DateTimeField()
     vehicle = models.ForeignKey('Vehicle', on_delete=models.CASCADE,
                                 related_name='steps')
+    objects = LocationOrderedManager()
 
     def is_on_city_boundaries(self):
         calculated_distance = distance(

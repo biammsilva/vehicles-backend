@@ -17,8 +17,21 @@ class LocationSerializer(serializers.ModelSerializer):
 
 
 class VehicleSerializer(serializers.ModelSerializer):
-    steps = LocationSerializer(many=True, read_only=True)
+    last_lat = serializers.SerializerMethodField(read_only=True)
+    last_lng = serializers.SerializerMethodField(read_only=True)
 
     class Meta:
         model = Vehicle
-        fields = ['id', 'steps']
+        fields = ['id', 'last_lat', 'last_lng']
+
+    def get_last_lat(self, obj):
+        last_location = Location.objects.filter(
+            vehicle=obj.id
+        ).order_by('-at')[:1][0]
+        return last_location.lat
+
+    def get_last_lng(self, obj):
+        last_location = Location.objects.filter(
+            vehicle=obj.id
+        ).order_by('-at')[:1][0]
+        return last_location.lng

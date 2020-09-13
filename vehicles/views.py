@@ -21,12 +21,9 @@ class VehicleViewSet(mixins.CreateModelMixin,
         return self.queryset.exclude(steps=None)
 
     def create(self, request, *args, **kwargs):
-        print('comeco')
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        print('validou')
         self.perform_create(serializer)
-        print('criou')
         headers = self.get_success_headers(serializer.data)
         return Response(None, status=status.HTTP_204_NO_CONTENT,
                         headers=headers)
@@ -47,12 +44,9 @@ class LocationViewSet(mixins.CreateModelMixin,
         )
 
     def create(self, request, *args, **kwargs):
-        print('comeco')
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        print('validou')
         self.perform_create(serializer)
-        print('criou')
         headers = self.get_success_headers(serializer.data)
         return Response(None, status=status.HTTP_204_NO_CONTENT,
                         headers=headers)

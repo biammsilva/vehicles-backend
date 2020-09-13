@@ -42,8 +42,6 @@ class Location(models.Model):
             last_location = geolocator.reverse(
                 (last_lat_lng.lat, last_lat_lng.lng)
             )
-            print(last_location.raw['address']['road'])
-            print(location.raw['address']['road'])
             if last_location.raw['address']['road']\
                == location.raw['address']['road']:
                 return True
@@ -51,10 +49,6 @@ class Location(models.Model):
 
     def save(self, *args, **kwargs):
         if self.is_on_city_boundaries():
-            print('ta no raio')
             self.is_same_street = self.is_on_same_street()
             return super().save(*args, **kwargs)
-        print('não ta no raio')
-        print(self.lat)
-        print(self.lng)
         raise ValidationError('Location out of the city boundaries')

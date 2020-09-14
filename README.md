@@ -15,14 +15,14 @@ I've choosen PostgreSQL because of his postgis extension, that would allow the s
 
 ## Solution choices:
 
-The endpoint GET http://api-url/vehicles used to return a full list of the vehicles and its locations.
+The endpoint GET http://api-url/vehicles used to be a return a full list of the vehicles and its locations.
 But, optimizing the apllication, I've choosen to return only the vehicles that had at least one location and show only the last location of the vehicle.
-That way, it could be showed on the map, and if the user wants to see the locations of the vehicle, the endpoint GET http://api-url/vehicles/id-vehicle/locations can be requested and return all the locations.
+That way, it could be showed on the map, and if the user wants to see the locations of the vehicle, the endpoint GET http://api-url/vehicles/id-vehicle/locations can be requested and return all the locations of that specific vehicle.
 If you want to see all the vehicles use the queryparam 'all': http://api-url/vehicles?all=1
 
 When a location is added, the software verify if the geopoint is inside the 3.5km radious from door2door office. If it's not, the API return a 400 status code and the message: "Location out of the city boundaries".
 
-
+**Production url**: https://api-vehicles.herokuapp.com/
 
 ## Run with virtual environment:
 

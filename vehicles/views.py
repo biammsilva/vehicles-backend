@@ -13,6 +13,21 @@ class VehicleViewSet(mixins.CreateModelMixin,
                      viewsets.GenericViewSet):
     """
     API endpoint that allows vehicles to be added, viewed or edited.
+
+    list:
+    Return a list of the vehicles that have any location.
+    Parameter 'all': If 'true' return all the vehicles
+
+    retrieve:
+    Return the vehicle if its not deleted. Should return\
+        the vehicle that has no locations too.
+
+    create:
+    Create a vehicle
+
+    destroy:
+    Soft deletes a vehicle
+
     """
     queryset = Vehicle.objects.all()
     serializer_class = VehicleSerializer
@@ -36,7 +51,14 @@ class LocationViewSet(mixins.CreateModelMixin,
                       mixins.ListModelMixin,
                       viewsets.GenericViewSet):
     """
-    API endpoint that allows locations to be added or viewed.
+    API endpoint that allows locations to be added, viewed or edited.
+
+    list:
+    Return a list of the locations of the vehicle.
+
+    create:
+    Adds a location to the vehicle
+
     """
     queryset = Location.objects.all()
     serializer_class = LocationSerializer

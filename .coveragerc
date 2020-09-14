@@ -1,0 +1,5 @@
+[run]
+omit =
+        manage.py
+        vehicles_backend/wsgi.py 
+        vehicles_backend/asgi.py

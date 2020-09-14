@@ -12,6 +12,9 @@ class BaseViewTest(TestCase):
         vehicle_2 = Vehicle.objects.create(
             id='5ee32186-f45d-11ea-adc1-0242ac120002'
         )
+        Vehicle.objects.create(
+            id='9d6a8840-def2-42b6-af24-f19a3c6de059'
+        )
         Location.objects.create(
             at='2020-09-11T18:40:55Z', lat=52.53, lng=13.40, vehicle=vehicle_1
         )
@@ -27,53 +30,44 @@ class BaseViewTest(TestCase):
 class VehicleViewTestCase(BaseViewTest):
 
     def test_success_get_all_vehicles(self):
-        response = self.client.get('/vehicles/')
+        response = self.client.get('/vehicles')
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.data, [
             {
                 "id": "5084decc-f45d-11ea-adc1-0242ac120002",
-                "steps": [
-                    {
-                        "lat": 52.53,
-                        "lng": 13.40,
-                        "at": "2020-09-11T18:40:55Z"
-                    },
-                    {
-                        "lat": 52.53,
-                        "lng": 13.40,
-                        "at": "2020-09-11T18:42:55Z"
-                    }
-                ]
+                "last_lat": 52.53,
+                "last_lng": 13.40,
             }, {
                 "id": "5ee32186-f45d-11ea-adc1-0242ac120002",
-                "steps": [
-                    {
-                        "lat": 52.53,
-                        "lng": 13.40,
-                        "at": "2020-09-11T18:40:55Z"
-                    }
-                ]
+                "last_lat": 52.53,
+                "last_lng": 13.40,
             }
         ])
 
     def test_success_get_one_vehicle(self):
         response = self.client.get(
-            '/vehicles/5ee32186-f45d-11ea-adc1-0242ac120002/'
+            '/vehicles/5ee32186-f45d-11ea-adc1-0242ac120002'
         )
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.data, {
             "id": "5ee32186-f45d-11ea-adc1-0242ac120002",
-            "steps": [
-                {
-                    "lat": 52.53,
-                    "lng": 13.40,
-                    "at": "2020-09-11T18:40:55Z"
-                }
-            ]
+            "last_lat": 52.53,
+            "last_lng": 13.40,
+        })
+
+    def test_success_get_one_vehicle_with_no_locations(self):
+        response = self.client.get(
+            '/vehicles/9d6a8840-def2-42b6-af24-f19a3c6de059'
+        )
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.data, {
+            "id": "9d6a8840-def2-42b6-af24-f19a3c6de059",
+            "last_lat": None,
+            "last_lng": None,
         })
 
     def test_success_post_new_vehicle(self):
-        response = self.client.post('/vehicles/', {
+        response = self.client.post('/vehicles', {
             'id': '8412e8a2-f52e-11ea-adc1-0242ac120002'
         })
         self.assertEqual(response.status_code, 204)
@@ -84,7 +78,7 @@ class LocationViewTestCase(BaseViewTest):
 
     def test_success_get_all_locations_from_a_vehicle(self):
         response = self.client.get(
-            '/vehicles/5084decc-f45d-11ea-adc1-0242ac120002/locations/'
+            '/vehicles/5084decc-f45d-11ea-adc1-0242ac120002/locations'
         )
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.data, [
@@ -102,7 +96,7 @@ class LocationViewTestCase(BaseViewTest):
 
     def test_success_create_location_on_city_boundaries(self):
         response = self.client.post(
-            '/vehicles/5084decc-f45d-11ea-adc1-0242ac120002/locations/', {
+            '/vehicles/5084decc-f45d-11ea-adc1-0242ac120002/locations', {
                 "lat": 52.53,
                 "lng": 13.41,
                 "at": "2017-09-01T12:10:00Z"
@@ -113,7 +107,7 @@ class LocationViewTestCase(BaseViewTest):
 
     def test_success_create_location_out_of_city_boundaries(self):
         response = self.client.post(
-            '/vehicles/5084decc-f45d-11ea-adc1-0242ac120002/locations/', {
+            '/vehicles/5084decc-f45d-11ea-adc1-0242ac120002/locations', {
                 "lat": 52.53,
                 "lng": 13.49,
                 "at": "2017-09-01T12:10:00Z"

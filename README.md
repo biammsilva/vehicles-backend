@@ -24,6 +24,8 @@ When a location is added, the software verify if the geopoint is inside the 3.5k
 
 **Production url**: https://api-vehicles.herokuapp.com/
 
+In that link, you can see the endpoint documented
+
 ## Run with virtual environment:
 
 ### Setup

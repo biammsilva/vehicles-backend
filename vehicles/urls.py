@@ -4,11 +4,12 @@ from rest_framework.urls import url
 
 from .views import VehicleViewSet, LocationViewSet
 
-router = routers.SimpleRouter()
+router = routers.SimpleRouter(trailing_slash=False)
 
-router.register('', VehicleViewSet)
+router.register(r'vehicles', VehicleViewSet)
 
-vehicles_router = routers.NestedSimpleRouter(router, '', lookup='vehicle')
+vehicles_router = routers.NestedSimpleRouter(router, r'vehicles',
+                                             lookup='vehicle')
 
 vehicles_router.register(
     'locations',
@@ -16,6 +17,6 @@ vehicles_router.register(
 )
 
 urlpatterns = [
-    url('', include(router.urls)),
-    url('', include(vehicles_router.urls)),
+    url(r'^', include(router.urls)),
+    url('^', include(vehicles_router.urls)),
 ]

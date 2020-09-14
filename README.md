@@ -3,6 +3,27 @@
 
 API to provide data for vehicles localization.
 
+## Technologies choice:
+
+### Django:
+
+Django rest framework has scaffolds and builtins resources that allows to create a CRUD easily than another frameworks. The viewsets and the orm helps a lot to create a simple API.
+
+## Postgres:
+
+I've choosen PostgreSQL because of his postgis extension, that would allow the scale of the project, working with geo referenced querying in database.
+
+## Solution choices:
+
+The endpoint GET http://api-url/vehicles used to return a full list of the vehicles and its locations.
+But, optimizing the apllication, I've choosen to return only the vehicles that had at least one location and show only the last location of the vehicle.
+That way, it could be showed on the map, and if the user wants to see the locations of the vehicle, the endpoint GET http://api-url/vehicles/id-vehicle/locations can be requested and return all the locations.
+If you want to see all the vehicles use the queryparam 'all': http://api-url/vehicles?all=1
+
+When a location is added, the software verify if the geopoint is inside the 3.5km radious from door2door office. If it's not, the API return a 400 status code and the message: "Location out of the city boundaries".
+
+
+
 ## Run with virtual environment:
 
 ### Setup

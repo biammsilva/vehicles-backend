@@ -19,5 +19,5 @@ from rest_framework.documentation import include_docs_urls
 
 urlpatterns = [
     path('', include_docs_urls(title='Vehicles API')),
-    path('vehicles/', include('vehicles.urls')),
+    path('', include('vehicles.urls')),
 ]

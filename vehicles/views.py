@@ -18,6 +18,8 @@ class VehicleViewSet(mixins.CreateModelMixin,
     serializer_class = VehicleSerializer
 
     def get_queryset(self):
+        if bool(self.request.query_params.get('all')):
+            return self.queryset
         return self.queryset.exclude(steps=None)
 
     def create(self, request, *args, **kwargs):

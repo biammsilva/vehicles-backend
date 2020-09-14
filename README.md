@@ -26,6 +26,14 @@ When a location is added, the software verify if the geopoint is inside the 3.5k
 
 In that link, you can see the endpoint documented
 
+### Solution in 1000+ vehicles case:
+
+For that I would deploy the api in a serverless resource, such as: Lambda, Cloud functions, Azure Functions...
+That way, the serverless application would handle the scale as it occours.
+
+One thing that I've made to help with that in the backend, was to show at /vehicles endpoint only the last position of the vehicle, so, the payload would not be do heavy.
+And in the frontend, I've clusterized the map, to get the visualization easier.
+
 ## Run with virtual environment:
 
 ### Setup

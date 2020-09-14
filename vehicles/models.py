@@ -1,14 +1,24 @@
 from django.db import models
 from geopy.distance import distance
-from geopy.geocoders import Nominatim
 from rest_framework.exceptions import ValidationError
 
 
 DOOR_2_DOOR_LATLONG = (52.53, 13.403)
 
 
+class VehicleActivesManager(models.Manager):
+    def get_queryset(self):
+        return super().get_queryset().filter(is_deleted=False)
+
+
 class Vehicle(models.Model):
     id = models.UUIDField(primary_key=True, serialize=True)
+    is_deleted = models.BooleanField(null=False, default=False)
+    objects = VehicleActivesManager()
+
+    def delete(self):
+        self.is_deleted = True
+        self.save()
 
 
 class LocationOrderedManager(models.Manager):

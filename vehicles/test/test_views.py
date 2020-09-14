@@ -66,6 +66,13 @@ class VehicleViewTestCase(BaseViewTest):
             "last_lng": None,
         })
 
+    def test_success_delete_one_vehicle(self):
+        response = self.client.delete(
+            '/vehicles/9d6a8840-def2-42b6-af24-f19a3c6de059'
+        )
+        self.assertEqual(response.status_code, 204)
+        self.assertEqual(response.data, None)
+
     def test_success_post_new_vehicle(self):
         response = self.client.post('/vehicles', {
             'id': '8412e8a2-f52e-11ea-adc1-0242ac120002'
